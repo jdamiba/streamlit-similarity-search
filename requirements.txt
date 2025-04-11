@@ -1,0 +1,10 @@
+fastapi==0.109.2
+uvicorn==0.27.1
+python-multipart==0.0.9
+qdrant-client==1.7.0
+torch==2.2.0
+torchvision==0.17.0
+transformers==4.37.2
+Pillow
+python-dotenv==1.0.1 
+fastembed==0.6.0
