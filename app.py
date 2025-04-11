@@ -15,11 +15,28 @@ load_dotenv()
 # Disable progress bars
 disable_progress_bars()
 
-# Initialize Qdrant client
-client = QdrantClient(
-    url=os.getenv("QDRANT_URL"),
-    api_key=os.getenv("QDRANT_API_KEY"),
-)
+# Get Qdrant credentials
+qdrant_url = os.getenv("QDRANT_URL")
+qdrant_api_key = os.getenv("QDRANT_API_KEY")
+
+# Verify credentials
+if not qdrant_url or not qdrant_api_key:
+    st.error("Missing Qdrant credentials. Please check your .env file.")
+    st.stop()
+
+# Initialize Qdrant client with error handling
+try:
+    client = QdrantClient(
+        url=qdrant_url,
+        api_key=qdrant_api_key,
+    )
+    # Test the connection
+    client.get_collections()
+except Exception as e:
+    st.error(f"Failed to connect to Qdrant: {str(e)}")
+    st.error(f"URL: {qdrant_url}")
+    st.error("Please verify your Qdrant URL and API key are correct.")
+    st.stop()
 
 # Collection name
 COLLECTION_NAME = "image_search_python_streamlit"
