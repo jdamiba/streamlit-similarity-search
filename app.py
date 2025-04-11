@@ -106,5 +106,5 @@ if query:
         cols = st.columns(3)
         for i, result in enumerate(results):
             with cols[i % 3]:
-                st.image(result.payload["path"], use_column_width=True)
+                st.image(result.payload["path"], use_container_width=True)
                 st.write(f"Score: {result.score:.2f}") 
