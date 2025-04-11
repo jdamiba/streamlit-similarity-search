@@ -41,9 +41,15 @@ except Exception as e:
 # Collection name
 COLLECTION_NAME = "image_search_python_streamlit"
 
-# Initialize models
-text_embedding = TextEmbedding(model_name="Qdrant/clip-ViT-B-32-text")
-image_embedding = ImageEmbedding(model_name="Qdrant/clip-ViT-B-32-vision")
+# Initialize models with error handling
+try:
+    # Using CLIP for both text and image embeddings
+    text_embedding = TextEmbedding(model_name="Qdrant/clip-ViT-B-32-text")
+    image_embedding = ImageEmbedding(model_name="Qdrant/clip-ViT-B-32-vision")
+except Exception as e:
+    st.error(f"Failed to initialize models: {str(e)}")
+    st.error("Please try again later or contact support if the issue persists.")
+    st.stop()
 
 def verify_collection():
     """Verify that the collection exists and is accessible"""
