@@ -3,6 +3,7 @@ import streamlit as st
 from qdrant_client import QdrantClient
 from qdrant_client.http import models
 from fastembed import TextEmbedding, ImageEmbedding
+from fastembed.common.model_management import disable_progress_bars
 from PIL import Image
 import glob
 from dotenv import load_dotenv
@@ -10,6 +11,9 @@ import numpy as np
 
 # Load environment variables
 load_dotenv()
+
+# Disable progress bars
+disable_progress_bars()
 
 # Initialize Qdrant client
 client = QdrantClient(
