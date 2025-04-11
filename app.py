@@ -56,10 +56,9 @@ def verify_collection():
     try:
         collections = client.get_collections()
         available_collections = [col.name for col in collections.collections]
-        st.write("Available collections:", available_collections)
         
         if COLLECTION_NAME not in available_collections:
-            st.error(f"Collection '{COLLECTION_NAME}' not found. Available collections are: {available_collections}")
+            st.error(f"Collection '{COLLECTION_NAME}' not found.")
             return False
         return True
     except Exception as e:
